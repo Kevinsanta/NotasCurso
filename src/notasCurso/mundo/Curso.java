@@ -58,7 +58,12 @@ public class Curso {
     public double promedio() {
         double promedio = 0;
 
-        // TODO: Obtener el promedio de las notas de los estudiantes
+        double sumaNotas = 0;
+        for (int i = 0; i < notas.length; i++) {
+            sumaNotas += notas[i];
+        }
+
+        promedio = sumaNotas / TOTAL_EST;
 
         return promedio;
     }
@@ -69,8 +74,16 @@ public class Curso {
      * @return Número de estudiantes que tienen la nota mayor al promedio. número >= 0.
      */
     public int darCantidadSobrePromedio() {
-        // TODO: Calcular el número de notas mayores
-        return 0;
+        double promedio = promedio();
+
+        int estudiantesSobrePromedio = 0;
+        for (int i = 0; i < notas.length; i++) {
+            if(notas[i] > promedio){
+                estudiantesSobrePromedio++;
+            }
+        }
+
+        return estudiantesSobrePromedio;
     }
 
     /**
@@ -90,7 +103,7 @@ public class Curso {
      * @param pNota          Nota del estudiante.
      */
     public void cambiarNota(int pNumEstudiante, double pNota) {
-        // TODO: Cambiar la nota del estudiante pNumEstudiante
+        notas[pNumEstudiante - 1] = pNota;
     }
 
     // -----------------------------------------------------------------
@@ -100,16 +113,31 @@ public class Curso {
      * Obtener la cantidad de estudiantes que no pasaron el curso
      */
     public int cantidadReprobados() {
-        // TODO: Obtener la cantidad de estudiantes que no pasaron el curso
-        return 0;
+        double promedio = promedio();
+
+        int estudiantesReprobados = 0;
+        for (int i = 0; i < notas.length; i++) {
+            if(notas[i] <= promedio){
+                estudiantesReprobados++;
+            }
+        }
+
+        return estudiantesReprobados;
     }
 
     /**
      * Obtener la mejor nota del curso.
      */
     public double mejorNota() {
-        // TODO: Obtener la mejor nota del curso.
-        return 0;
+        double mejorNota = 0;
+
+        for (int i = 0; i < notas.length; i++) {
+            if(notas[i] > mejorNota){
+                mejorNota = notas[i];
+            }
+        }
+
+        return mejorNota;
     }
 
     /**
@@ -117,8 +145,9 @@ public class Curso {
      * Debe ser un número entre 0 y 100.
      */
     public double darPorcentajePasaron() {
-        // TODO: Obtener el porcentaje de estudiantes que pasaron el curso
-        return 0.0;
+        int estudiantesQuePasaron = darCantidadSobrePromedio();
+        double porcentajePasaron = ((double) estudiantesQuePasaron / (double)TOTAL_EST) * 100;
+        return porcentajePasaron;
     }
 
     /**
@@ -127,7 +156,8 @@ public class Curso {
      * un estudiante reprobó la materia.
      */
     public boolean todosPasaron() {
-        // TODO: Determinar si todos los estudiantes del curso pasaron la materia
-        return false;
+        int cantidadReprobados = cantidadReprobados();
+        boolean nadieReprobo = cantidadReprobados == 0;
+        return nadieReprobo;
     }
 }
