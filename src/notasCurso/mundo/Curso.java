@@ -78,7 +78,7 @@ public class Curso {
 
         int estudiantesSobrePromedio = 0;
         for (int i = 0; i < notas.length; i++) {
-            if(notas[i] > promedio){
+            if(notas[i] >= promedio){
                 estudiantesSobrePromedio++;
             }
         }
@@ -117,7 +117,7 @@ public class Curso {
 
         int estudiantesReprobados = 0;
         for (int i = 0; i < notas.length; i++) {
-            if(notas[i] <= promedio){
+            if(notas[i] < promedio){
                 estudiantesReprobados++;
             }
         }
